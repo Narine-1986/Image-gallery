@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Welcome admin page</h1>
+
+
+<a href="/">Home</a><br>
+
+<a href="/logout">Logout</a>
+<br>
+
+<h3>Add category</h3>
+<form action="/saveCategory" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Category name"><br>
+    <input type="file" name="image" ><br><br>
+    <input type="submit" value="Add category">
+</form>
+<br><br>
+
+<table border="1">
+    <thead>
+    <th>id</th>
+    <th>name</th>
+    <th>image</th>
+    <th>update</th>
+    <th>delete</th>
+    </thead>
+    <tbody th:each="category : ${allCategories}">
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <td th:text="${category.picUrl}"></td>
+        <td><a th:href="@{/updateCategory(id=${category.id})}">update</a></td>
+        <td><a th:href="@{/deleteCategory(id=${category.id})}">delete</a></td>
+    </tbody>
+</table>
+
+<br>
+<br>
+<h3>Add image</h3>
+<form action="/saveImage" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Image name"><br>
+<!--    <input type="text" name="uploadDate"><br>-->
+    <select name="category.id">
+        <option disabled selected value>Choose image category</option>
+        <option th:each="category : ${allCategories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select><br>
+    <input type="file" name="image"><br><br>
+    <input type="submit" value="Add image">
+</form>
+
+<br><br>
+
+<table border="1">
+    <thead>
+    <th>id</th>
+    <th>name</th>
+    <th>image</th>
+    <th>category</th>
+    <th>update</th>
+    <th>delete</th>
+    </thead>
+    <tbody th:each="image : ${allImages}">
+    <td th:text="${image.id}"></td>
+    <td th:text="${image.name}"></td>
+    <td th:text="${image.picUrl}"></td>
+    <td th:text="${image.category.name}"></td>
+    <td><a th:href="@{/updateImage(id=${image.id})}">update</a></td>
+    <td><a th:href="@{/deleteImage(id=${image.id})}">delete</a></td>
+    </tbody>
+</table>
+</body>
+</html>

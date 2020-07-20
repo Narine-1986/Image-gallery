@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/admin">Admin</a>
+
+<h3>Update Category</h3>
+<form action="/saveCategory" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${catById.id}"><br>
+    <input type="text" name="name" th:value="${catById.name}"><br>
+    <input type="file" name="image" th:value="${imgDirect} + ${catById.picUrl}"><br><br>
+    <input type="submit" value="Update">
+</form>
+</body>
+</html>
